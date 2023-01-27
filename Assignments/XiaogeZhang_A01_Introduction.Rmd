@@ -47,7 +47,7 @@ Enter answers to the questions just below the >Answer: prompt.
 
 3. Are there any components of the course about which you feel apprehensive?
 
-> Answer: Knitting R-markdown documents used to be a pain for me. Hopefully this time it all works out. 
+> Answer: Knitting R-markdown documents used to be a pain for me. Hopefully this time it all works out in a better way. 
 
 
 ## 3) GitHub
