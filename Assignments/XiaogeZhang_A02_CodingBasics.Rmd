@@ -31,12 +31,13 @@ This exercise accompanies the lessons in Environmental Data Analytics on coding 
 4.  Insert comments in your code to describe what you are doing.
 
 ```{r}
-#1. 
-
-#2. 
-
-#3. 
-
+#1. generate a sequence of numbers from 1 to 100 by 4
+seq1 = seq(from=1, to=100, by=4)
+#2. calculate the mean and median
+mean(seq1)
+median(seq1)
+#3. check if the mean is greater than the median
+mean(seq1) > median(seq1)
 ```
 
 ## Basics Day 2
