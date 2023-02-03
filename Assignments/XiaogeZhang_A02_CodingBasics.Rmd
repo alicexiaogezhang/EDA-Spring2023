@@ -51,7 +51,8 @@ mean(seq1) > median(seq1)
 8.  Label the columns of your data frame with informative titles.
 
 ```{r}
-
+#5. 
+names <- c('alice','christy', 'xiaoge', )
 ```
 
 9.  QUESTION: How is this data frame different from a matrix?
