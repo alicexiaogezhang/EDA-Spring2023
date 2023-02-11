@@ -171,7 +171,8 @@ ggplot(Litter, aes(x = functionalGroup)) +
 
 ```{r}
 ggplot(Litter) + 
-  geom_boxplot(aes(x = functionalGroup, y = dryMass))
+  geom_boxplot(aes(x = functionalGroup, y = dryMass)) + 
+  theme(axis.text.x = element_text(angle = 30, vjust = 0.8, hjust=0.6))
 
 ggplot(Litter) +
   geom_violin(aes(x = functionalGroup, y = dryMass), draw_quantiles = c(0.25, 0.5, 0.75)) + 
@@ -180,7 +181,7 @@ ggplot(Litter) +
 
 Why is the boxplot a more effective visualization option than the violin plot in this case?
 
-> Answer: 
+> Answer: In this case, boxplot is a more effective visualization option than violin plot because you can see the distribution more. For the violin plot, since the dry mass of needles generally was much higher than the rest of the categories, it is not obvious at all how they are distributed. 
 
 What type(s) of litter tend to have the highest biomass at these sites?
 
