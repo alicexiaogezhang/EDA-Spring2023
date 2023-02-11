@@ -180,7 +180,7 @@ ggplot(Litter) +
 
 Why is the boxplot a more effective visualization option than the violin plot in this case?
 
-> Answer:
+> Answer: 
 
 What type(s) of litter tend to have the highest biomass at these sites?
 
