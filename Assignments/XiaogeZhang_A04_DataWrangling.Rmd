@@ -41,12 +41,26 @@ The completed exercise is due on Friday, Feb 20th @ 5:00pm.
 
 ```{r, message = FALSE}
 #1a 
+# load libraries
+library(tidyverse)
+library(lubridate)
+library(here)
 
 #1b 
+getwd()
 
 #1c 
+# read in raw data files for this assignment
+o3_2018_raw <- read.csv('./Data/Raw/EPAair_O3_NC2018_raw.csv', stringsAsFactors = TRUE)
+o3_2019_raw <- read.csv('./Data/Raw/EPAair_O3_NC2019_raw.csv', stringsAsFactors = TRUE)
+pm25_2018_raw <- read.csv('./Data/Raw/EPAair_PM25_NC2018_raw.csv', stringsAsFactors = TRUE)
+pm25_2019_raw <- read.csv('./Data/Raw/EPAair_PM25_NC2019_raw.csv', stringsAsFactors = TRUE)
 
 #2 
+glimpse(o3_2018_raw)
+glimpse(o3_2019_raw)
+glimpse(pm25_2018_raw)
+glimpse(pm25_2019_raw)
 
 ```
 
@@ -63,8 +77,18 @@ The completed exercise is due on Friday, Feb 20th @ 5:00pm.
 
 ```{r}
 #3
+# change date columns to be date objects
+o3_2018_raw$Date <- as.Date(o3_2018_raw$Date, format = "%m/%d/%Y")
+o3_2019_raw$Date <- as.Date(o3_2019_raw$Date, format = "%m/%d/%Y")
+pm25_2018_raw$Date <- as.Date(pm25_2018_raw$Date, format = "%m/%d/%Y")
+pm25_2019_raw$Date <- as.Date(pm25_2019_raw$Date, format = "%m/%d/%Y")
 
 #4
+# select columns: Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE
+o3_2018_pro <- select(o3_2018_raw, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+o3_2019_pro <- select(o3_2019_raw, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+pm25_2018_pro <- select(pm25_2018_raw, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+pm25_2019_pro <- select(pm25_2019_raw, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
 
 #5
 
