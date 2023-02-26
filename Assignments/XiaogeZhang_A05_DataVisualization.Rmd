@@ -76,10 +76,12 @@ For numbers 4-7, create ggplot graphs and adjust aesthetics to follow best pract
 ```{r plot total P vs PO4}
 #4 
 plot4 <- 
-  ggplot(lakes, aes(x = tp_ug, y = po4)) +
+  ggplot(lakes, aes(y = tp_ug, x = po4)) +
   geom_point(aes(color=lakename)) + 
   geom_smooth(method = lm, color='black') +
-  ylim(0,100)
+  xlim(0,45) +
+  ylab('Total Phosphorus') + 
+  xlab('Phosphate')
 print(plot4)
 ```
 
@@ -90,7 +92,16 @@ Tip: R has a build in variable called `month.abb` that returns a list of months;
 
 ```{r Create boxplots}
 #5 
+# temperature
+plot5a <-
+  ggplot(lakes, aes(x = month, y = temperature_C)) +
+  geom_boxplot(aes(color = lakename)) 
+print(plot5a)
+# TP
 
+# TN
+
+# a cowplot that combines the previous three graphs
 ```
 
 Question: What do you observe about the variables of interest over seasons and between lakes? 
