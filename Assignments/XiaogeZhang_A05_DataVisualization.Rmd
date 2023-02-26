@@ -32,10 +32,23 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Vi
 
 ```{r initialize project}
 #1 
+#load packages
+library(tidyverse)
+library(lubridate)
+library(here)
+library(cowplot)
+# check working directory
+getwd()
+#upload datasets
+lakes <- read.csv('./Data/Processed/NTL-LTER_Lake_Chemistry_Nutrients_PeterPaul_Processed.csv', stringsAsFactors = TRUE)
+litter <- read.csv('./Data/Processed/NEON_NIWO_Litter_mass_trap_Processed.csv', stringsAsFactors = TRUE)
 
 #2 
-
+# change the date columns to Date format
+lakes$sampledate <- as.Date(lakes$sampledate, format = '%Y-%m-%d')
+litter$collectDate <- as.Date(litter$collectDate, format = '%Y-%m-%d')
 ```
+
 ## Define your theme
 3. Build a theme and set it as your default theme. Customize the look of at least two of the following: 
  * Plot background
@@ -45,8 +58,14 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Vi
  * Legend
 
 ```{r build plot theme}
-#3
-
+#3 
+hw_theme <- theme_classic(base_size = 12) +
+  theme(axis.text = element_text(color = "grey"), 
+        axis.title = element_text(color='grey'),
+        legend.position = "top", 
+        plot.background = element_rect(fill = 'lightyellow'), 
+        plot.title = element_text(size = rel(2))) 
+theme_set(hw_theme)
 ```
 
 ## Create graphs
@@ -56,7 +75,12 @@ For numbers 4-7, create ggplot graphs and adjust aesthetics to follow best pract
 
 ```{r plot total P vs PO4}
 #4 
-
+plot4 <- 
+  ggplot(lakes, aes(x = tp_ug, y = po4)) +
+  geom_point(aes(color=lakename)) + 
+  geom_smooth(method = lm, color='black') +
+  ylim(0,100)
+print(plot4)
 ```
 
 
