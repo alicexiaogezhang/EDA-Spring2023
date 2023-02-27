@@ -90,7 +90,7 @@ print(plot4)
 
 Tip: R has a build in variable called `month.abb` that returns a list of months;see <https://r-lang.com/month-abb-in-r-with-example>
 
-```{r Create boxplots}
+```{r fig.height = 6, fig.width = 12}
 #5 
 # temperature
 plot5a <-
