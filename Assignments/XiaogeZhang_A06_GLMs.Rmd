@@ -172,7 +172,7 @@ TukeyHSD(temp_lake_aov)
 16.From the findings above, which lakes have the same mean temperature, statistically speaking, as Peter Lake? Does any lake have a mean temperature that is statistically distinct from all the other lakes?
 
 >Answer:
-
+Paul Lake and Ward Lake have the same mean temperature as Peter Lake. 
  
 
 17. If we were just looking at Peter Lake and Paul Lake. What's another test we might explore to see whether they have distinct mean temperatures? 
