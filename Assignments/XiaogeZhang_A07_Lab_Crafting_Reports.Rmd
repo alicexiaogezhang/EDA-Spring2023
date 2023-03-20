@@ -2,7 +2,11 @@
 title: 'A07 - Crafting Reports'
 author: "Xiaoge Zhang" 
 date: "Spring 2023"
-output: pdf_document
+output:
+ pdf_document: 
+  toc: TRUE
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Objectives:
@@ -26,7 +30,7 @@ output: pdf_document
 Create a table below summarizing the metadata of the EPA Air Quality data. The first column will be the metadata attribute item name: "Source", "Date", and "Filename". And the second column will include the metadata values: "EPA Air Quality SYstem (AQS)", "2018-2019", and "EPAair_O3_PM25_NC1819_Processed.csv". The first column should be aligned to the right and the second to the left.
 
 | Item Name | Value |
-| --- | --- |
+| --: | --- |
 | Source | EPA Air Quality SYstem (AQS) | 
 | Date | 2018-2019 |
 | Filename | EPAair_O3_PM25_NC1819_Processed.csv | 
@@ -61,6 +65,7 @@ Customize the chunk options such that the code is run but is not displayed in th
 >
 > -   If your output table spans across two pages, try inserting a new line (via `\newpage`) in the markdown just before your code chunk.
 
+\newpage
 ```{r data.summary, echo=F}
 #Compute mean PM2.5 concentration for each county, sorted by value
 summary_PM25 <- epa_data %>% 
@@ -78,7 +83,8 @@ summary_Ozone <- epa_data %>%
   arrange(mean_Ozone)
 
 #Use the `kable` function to produce the 2 tables
-
+kable(summary_PM25,caption = "Mean Particulates (2.5mm)", col.names = c('County',"$\\mu g/m^3$"))
+kable(summary_Ozone,caption = "Mean Ozone", col.names = c('County',"$\\mu g/m^3$"))
 
 ```
 
@@ -88,14 +94,39 @@ summary_Ozone <- epa_data %>%
 
 Create two separate code chunks that create boxplots of the distribution of Ozone levels by month using, one for only records collected in 2018 and one for records in 2019. Customize the chunk options such that the final figures are displayed but not the code used to generate the figures. In addition, the plots aligned on the left side of the page and set the figure heights so both plots fit on the same page with minimal space remaining. Lastly, add a `fig.cap` chunk option to add a caption (title) to your plot that will display underneath the figure.
 
+```{r plot.2018, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Total Nitrogen", fig.align='left', fig.height= 2.5 }
 
+ozone2018 <- filter(epa_data, Year==2018)
+
+ggplot(data=ozone2018) +
+   geom_boxplot(aes(x=factor(Month, levels=1:12, labels=month.abb),y=Ozone)) +
+   labs(
+     title ='Recorded Ozone by month (2018)',
+     x = 'Month',
+     y =  expression(paste('Concentration (',mu, g/m^3,')'))
+   )
+```
+
+```{r plot.2019, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Monthly Ozone, 2019", fig.align='left', fig.height= 2.5 }
+
+ozone2019 <- filter(epa_data, Year==2019)
+
+ggplot(data=ozone2019) +
+   geom_boxplot(aes(x=factor(Month, levels=1:12, labels=month.abb),y=Ozone)) +
+   labs(
+     title ='Recorded Ozone by month (2019)',
+     x = 'Month',
+     y =  expression(paste('Concentration (',mu, g/m^3,')'))
+   )
+
+```
 
 \newpage
 
 ## Task 4: Knit and submit.
 Add a table of contents to your document and knit to a PDF. Submit your PDF to Sakai, but also be sure to commit and push your Rmd file used to create this knit document to GitHub. In the section below, add a link to your GitHub repository. 
 
+
 ### Git Repository
-
-
+https://github.com/alicexiaogezhang
 
