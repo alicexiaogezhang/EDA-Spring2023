@@ -1,6 +1,6 @@
 ---
 title: "Assignment 8: Time Series Analysis"
-author: "Student Name"
+author: "Xiaoge Zhang"
 date: "Spring 2023"
 output: pdf_document
 geometry: margin=2.54cm
@@ -28,6 +28,19 @@ This exercise accompanies the lessons in Environmental Data Analytics on general
 
 ```{r}
 #1
+getwd()
+library(tidyverse)
+library(lubridate)
+library(zoo)
+library(trend)
+
+hw_theme <- theme_classic(base_size = 12) +
+  theme(axis.text = element_text(color = "grey"), 
+        axis.title = element_text(color='grey'),
+        legend.position = "top", 
+        plot.background = element_rect(fill = 'lightyellow'), 
+        plot.title = element_text(size = rel(2))) 
+theme_set(hw_theme)
 ```
 
 
