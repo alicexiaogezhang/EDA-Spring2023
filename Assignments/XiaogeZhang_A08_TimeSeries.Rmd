@@ -48,7 +48,20 @@ theme_set(hw_theme)
 
 ```{r, message = FALSE}
 #2
+# read the datasets individually
+data1 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2010_raw.csv', stringsAsFactors = TRUE)
+data2 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2011_raw.csv', stringsAsFactors = TRUE)
+data3 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2012_raw.csv', stringsAsFactors = TRUE)
+data4 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2013_raw.csv', stringsAsFactors = TRUE)
+data5 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2014_raw.csv', stringsAsFactors = TRUE)
+data6 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2015_raw.csv', stringsAsFactors = TRUE)
+data7 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2016_raw.csv', stringsAsFactors = TRUE)
+data8 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2017_raw.csv', stringsAsFactors = TRUE)
+data9 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2018_raw.csv', stringsAsFactors = TRUE)
+data10 <- read.csv('./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2019_raw.csv', stringsAsFactors = TRUE)
 
+# combine them into a single dataframe
+GaringerOzone <- rbind(data1, data2, data3, data4, data5, data6, data7, data8, data9, data10)
 ```
 
 ## Wrangle
@@ -63,10 +76,15 @@ theme_set(hw_theme)
 
 ```{r}
 #3
+GaringerOzone$Date <- as.Date(GaringerOzone$Date, format='%m/%d/%Y')
 
 #4
+# select the wanted columns
+GaringerOzone <-  GaringerOzone %>% 
+  select(Date, Daily.Max.8.hour.Ozone.Concentration, DAILY_AQI_VALUE)
 
 #5
+
 
 #6
 
