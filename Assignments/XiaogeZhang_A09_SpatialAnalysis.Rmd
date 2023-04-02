@@ -148,7 +148,7 @@ Lastly, we want to attach some gage height data to our site locations. I've cons
 site_flow <- read.csv('./Data/Raw/NWIS_SiteFlowData_NE_RAW.csv', stringsAsFactors = TRUE)
 site_flow$site_no <- as.factor(site_flow$site_no)
 site_flow_pro <- site_flow %>% 
-  group_by('site_no', 'station_nm') %>% 
+  group_by(site_no, station_nm) %>% 
   summarize(mean_ht = mean(gage_ht, na.rm=T))
 
 #15. Show the column names
@@ -157,14 +157,14 @@ colnames(site_flow_pro)
 #16. Join the flow data to our NWIS gage location spatial dataframe
 flow_gage_sf_join <-  merge(x = site_flow_pro,
                            y = gage_sf, 
-                           by.x = 'site_no', 
-                           by.y = 'site_no' )
+                           by.x = 'station_nm', 
+                           by.y = 'station_nm' )
 
 #17. Show the column names of the joined dataset
 colnames(flow_gage_sf_join)
 
 #18. Show the dimensions of this joined dataset
-
+dim(flow_gage_sf_join)
 
 ```
 
@@ -177,7 +177,11 @@ Now we can examine where the flooding appears most acute by visualizing gage hei
 ```{r}
 #Map the points, sized by gage height
 
-
+ggplot() + 
+  geom_sf(data=county,aes(fill = E_POV),alpha=0.3) + 
+  #scale_fill_gradient2(low="red",high="blue",midpoint = 60000) + 
+  geom_sf(data=gage_sf) + 
+  labs(title='spatial distribution of gage height', subtitle='xiaoge zhang')
 ```
 
 ---
