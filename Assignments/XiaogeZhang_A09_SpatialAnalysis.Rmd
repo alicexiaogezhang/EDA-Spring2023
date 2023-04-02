@@ -178,9 +178,9 @@ Now we can examine where the flooding appears most acute by visualizing gage hei
 #Map the points, sized by gage height
 
 ggplot() + 
-  geom_sf(data=county,aes(fill = E_POV),alpha=0.3) + 
-  #scale_fill_gradient2(low="red",high="blue",midpoint = 60000) + 
-  geom_sf(data=gage_sf) + 
+  geom_sf(data = county, fill='lightblue') + 
+  geom_sf(data = flow_gage_sf_join, aes(color = mean_ht)) + 
+  scale_color_gradient(low="yellow", high="darkgreen") +
   labs(title='spatial distribution of gage height', subtitle='xiaoge zhang')
 ```
 
