@@ -1,11 +1,13 @@
 ---
-title: "Assignment 9: Spatial Analysis in R"
+title: 'Assignment 9: Spatial Analysis in R'
 author: "Xiaoge Zhang"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 geometry: margin=2.54cm
-editor_options: 
+editor_options:
   chunk_output_type: console
-  markdown: 
+  markdown:
     wrap: 72
 ---
 
@@ -230,10 +232,14 @@ douglas <- county_utm %>%
   filter(NAME == 'Douglas')
 
 #23 Select gages within the selected county
-
+gage_douglas <- gage_sf_utm[douglas,]
 
 #24 Plot
-
+ggplot() +
+  geom_sf(data = county_utm, fill='lightblue') + 
+  geom_sf(data = douglas, fill='blue') +
+  geom_sf(data = gage_douglas, color='red',shape='*') +
+  labs(title='NWIS Gage Locations in Douglas County, Nebraska', subtitle='Xiaoge Zhang')
 
 
 ```
