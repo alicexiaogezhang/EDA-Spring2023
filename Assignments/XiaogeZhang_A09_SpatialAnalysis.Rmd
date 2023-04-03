@@ -198,11 +198,14 @@ Up next we will do some spatial analysis with our data. To prepare for this, we 
 
 ```{r}
 #20 Transform the counties and gage location datasets to UTM Zone 14
-
+county_utm <- st_transform(county, c=32614)
+gage_sf_utm <- st_transform(gage_sf, c=32614)
 
 #21 Plot the data
-
-
+ggplot() +
+  geom_sf(data = county_utm, color='blue') + 
+  geom_sf(data = gage_sf_utm, color='red',shape='*') +
+  labs(title='NWIS Gage Locations in Nebraska (UTM version)', subtitle='Xiaoge Zhang')
 ```
 
 
