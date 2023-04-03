@@ -155,8 +155,8 @@ site_flow_pro <- site_flow %>%
 colnames(site_flow_pro)
 
 #16. Join the flow data to our NWIS gage location spatial dataframe
-flow_gage_sf_join <-  merge(x = site_flow_pro,
-                           y = gage_sf, 
+flow_gage_sf_join <-  merge(x = gage_sf,
+                           y = site_flow_pro, 
                            by.x = 'station_nm', 
                            by.y = 'station_nm' )
 
@@ -183,7 +183,8 @@ ggplot() +
   scale_color_gradient(low="yellow", high="darkgreen") +
   labs(title='spatial distribution of gage height', subtitle='xiaoge zhang')
 
-
+# mapview(flow_gage_sf_join, zcol='mean_ht', legend=TRUE) +
+#   mapview(county)
 
 ```
 
@@ -225,7 +226,8 @@ Now let's zoom into a particular county and examine the gages located there.
 
 ```{r}
 #22 Select the county
-
+douglas <- county_utm %>% 
+  filter(NAME == 'Douglas')
 
 #23 Select gages within the selected county
 
