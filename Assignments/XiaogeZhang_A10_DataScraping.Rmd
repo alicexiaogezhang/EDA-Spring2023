@@ -28,8 +28,10 @@ This exercise accompanies the lessons in Environmental Data Analytics on data sc
 
 ```{r, message = FALSE}
 #1
+library(tidyverse)
+library(rvest)
 
-
+getwd()
 ```
 
 2. We will be scraping data from the NC DEQs Local Water Supply Planning website, specifically the Durham's 2022 Municipal Local Water Supply Plan (LWSP): 
@@ -41,7 +43,7 @@ Indicate this website as the as the URL to be scraped. (In other words, read the
 
 ```{r set.the.scraping.website}
 #2
-
+link <- read_html('https://www.ncwater.org/WUDC/app/LWSP/report.php?pwsid=03-32-010&year=2022')
 
 ```
 
@@ -61,13 +63,17 @@ In the code chunk below scrape these values, assigning them to four separate var
 
 ```{r scrape.the.data}
 #3
-water.system.name <- 
-  
-PWSID <- 
-  
-ownership <- 
+water.system.name <- link %>% html_nodes('table:nth-child(7) tr:nth-child(1) td:nth-child(2)') %>% 
+  html_text()
 
-max.withdrawals.mgd <- 
+PWSID <- link %>% html_nodes('td tr:nth-child(1) td:nth-child(5)') %>% 
+  html_text()
+
+ownership <- link %>% html_nodes('table:nth-child(7) tr:nth-child(2) td:nth-child(4)') %>% 
+  html_text()
+
+max.withdrawals.mgd <- link %>% html_nodes(':nth-child(31) td:nth-child(9) , tr:nth-child(2) :nth-child(9), :nth-child(31) td:nth-child(6), :nth-child(31) td:nth-child(3)') %>% 
+  html_text()
 
 ```
 
@@ -82,7 +88,18 @@ max.withdrawals.mgd <-
 
 ```{r create.a.dataframe.from.scraped.data}
 #4
+months <- c()
+df_withdrawals <- data.frame("Month" = rep(1:12),
+                             "Year" = rep(2000,12),
+                             "Avg_Withdrawals_mgd" = as.numeric(avg_withdrawals),
+                             "Max_Withdrawals_mgd" = as.numeric(max_withdrawals))
 
+#Modify the dataframe to include the facility name and type as well as the date (as date object)
+df_withdrawals <- df_withdrawals %>% 
+  mutate(Registrant = !!the_registrant,
+         Facility_name = !!the_facility_name,
+         Facility_type = !!the_facility_type,
+         Date = my(paste(Month,"-",Year)))
 
 
 #5
