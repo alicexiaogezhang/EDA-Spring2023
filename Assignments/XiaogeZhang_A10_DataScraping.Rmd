@@ -202,13 +202,13 @@ ashville <- map(years_ash, scrape_a10, '01-11-010')
 
 ashville <- bind_rows(ashville)
 
-ggplot(df_2015,aes(x=Date,y=max_withdrawals_mgd)) + 
+ggplot(ashville,aes(x=Date,y=max_withdrawals_mgd)) + 
   geom_line() + 
   geom_smooth(method="loess",se=FALSE) +
-  labs(title = paste("2015 Water usage data for Durham"),
-       subtitle = '03-32-010',
+  labs(title = paste("2010-2021 Water usage data for Ashville"),
        y="Max Withdrawal (mgd)",
        x="Date")
 ```
 
 > Question: Just by looking at the plot (i.e. not running statistics), does Asheville have a trend in water usage over time?
+--- It looks like water usage decreased from 2010 to 2015 and then increased from 2015 to 2021. 
